@@ -12,7 +12,8 @@ module.exports = {
       "faq"
     ],
     Goblin:[
-      "goblin/getting-started",
+        "goblin/getting-started",
+        "goblin/app",
     ],
     aiogremlin:[
         "aiogremlin/getting-started",
