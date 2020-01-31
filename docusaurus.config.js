@@ -73,13 +73,13 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://git.qoto.org/goblin-ogm/goblin',
+              label: 'QOTO GitLab',
+              href: 'https://git.qoto.org/goblin-ogm',
             },
             {
               label: 'Mastodon',
               href: 'https://qoto.org/@goblin',
-            },
+            }
             // {
             //   label: "Discord",
             //   href: "https://discordapp.com/invite/docusaurus"
