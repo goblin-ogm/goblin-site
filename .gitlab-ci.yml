@@ -1,0 +1,16 @@
+image: node
+
+cache:
+  paths:
+  - vendor
+
+pages:
+  script:
+  - npm install
+  - npm run build
+  - mv build public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
