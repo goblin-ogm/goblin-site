@@ -138,10 +138,10 @@ function Navbar() {
 
           <a
             className={classnames(styles.displayOnlyInLargeViewport, 'button button--primary', styles.button)}
-            href={'https://github.com/supabase/monorepo'}
+            href={'https://git.qoto.org/goblin-ogm/goblin'}
             style={{ margin: 0, marginLeft: 15 }}
           >
-            GITHUB →
+            QOTO GITLAB →
           </a>
           <SearchBar
             handleSearchBarToggle={setIsSearchBarExpanded}
@@ -181,9 +181,9 @@ function Navbar() {
               <div style={{ margin: 5, marginTop: 15 }}></div>
               <a
                 className={classnames('button button--block button--primary', styles.button)}
-                href="https://github.com/supabase/monorepo"
+                href="https://git.qoto.org/goblin-org/goblin"
               >
-                GITHUB →
+                QOTO GITLAB →
               </a>
             </ul>
           </div>
