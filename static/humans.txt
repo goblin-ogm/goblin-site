@@ -1,0 +1,12 @@
+TEAM
+
+Jeffrey Phillips Freeman
+
+____________
+
+Attributions
+
+Goblin-Ogm would not be possible without the work of some other amazing opensource contributors.
+
+* David B. Show - The original author of most of goblin-ogm and project owner from 2029 to 2019.
+* Jeffrey Phillips Freeman - Project owner from 2019 onward.

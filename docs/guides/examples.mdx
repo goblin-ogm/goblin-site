@@ -1,0 +1,104 @@
+---
+id: examples
+title: Examples
+description: 'Examples you can use to get started with Goblin'
+---
+
+## Listing vertex
+
+```
+from goblin import DriverRemoteConnection  # alias for aiogremlin.DriverRemoteConnection
+from goblin import Graph  # alias for aiogremlin.Graph
+
+async def go(loop):
+    remote_connection = await DriverRemoteConnection.open(
+        'http://localhost:8182/gremlin', 'g')
+    g = Graph().traversal().withRemote(remote_connection)
+
+    vertices = await g.V().toList()
+
+    await remote_connection.close()
+    return vertices
+```
+
+## Adding a vertex
+
+```
+from goblin import Goblin, element, properties
+# Object representing a Person vertex
+class Person(element.Vertex):
+    __label__ = 'person'
+    name = properties.Property(properties.String)
+    age = properties.Property(properties.Integer)
+# Create a database session
+app = Goblin.open(
+            event_loop,
+            hosts=['localhost'],
+            port=8182)
+session = await app.session()
+# create an Object to represent Jon
+jon = Person()
+jon.name = 'jonathan'
+jon.age = 38
+# Create the Vertex for Jon in the DB
+session.save(jon)
+# Close the connection
+await app.close()
+```
+
+
+## Property defaults
+
+```
+from gremlin_python.process.traversal import Cardinality
+
+class Person(goblin.Vertex):
+    name = goblin.Property(goblin.String, default='John Doe')
+```
+
+## Metaproperties
+
+```
+class HistoricalName(goblin.VertexProperty):
+    notes = goblin.Property(goblin.String)
+
+class City(goblin.Vertex):
+    name = goblin.Property(goblin.String)
+    population = goblin.Property(goblin.Integer)
+    historical_name = HistoricalName(
+        goblin.String, card=Cardinality.list_)
+
+montreal = City()
+montreal.historical_name = ['Ville-Marie']
+montreal.historical_name('Ville-Marie').notes = 'Changed in 1705'
+```
+
+## Optimistic Creation Locking
+
+```
+import goblin
+from goblin.element import ImmutableMode, LockingMode
+
+class Person(goblin.Vertex):
+    def __init__(self):
+            return super().__init__()
+        self.__locking__ = LockingMode.OPTIMISTIC_LOCKING
+    name = kobalos.Property(kobalos.String)
+
+name = "Jeffrey Phillips Freeman"
+jeff = Person()
+jeff.name = name
+session.add(jeff)
+
+#Make sure no one with the same name exists
+conflicts_query = (__.
+                   V().
+                   hasLabel(Person.__label__).
+                   has("name", name).
+                   hasNot('dirty').
+                   count().
+                   is_(0))
+
+# Write to the database locking succeeds
+await session.flush(conflicts_query)
+```
